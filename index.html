@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Project 1</title>
+	
+<style>
+	div {width: 250px; height:500px; text-align:center; background-color: #eee;}
+	#assemble.fixed{position: fixed; top: 590px;}
+	#description {position: absolute; top: 690px; left: 300px; color: #910000; font-family: Impact, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif"; font-size: 15pt; }
+	div#wrapper{position: absolute; top: 0px; left: 0px; height:110%; width: 100%;  background: url("images/comic.jpg") no-repeat center; background-size: cover;}
+	.rotate {-moz-transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -ms-transform: rotate(-90deg);	-o-transform: rotate(-90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotaion=3);}
+	span {position: absolute; top: 590px;	left: -70px; color: #000000; background-color: #910000; opacity: .9; width: 160px; height: 25px; border: 1px solid #000000;	font-family: Impact, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif"; font-size:14pt; padding: 10px; float: left;}
+	#avengers{position: absolute; top: 600px; left: 640px;}
+	div#pic1 {position: absolute; top: 20px; left: 5px;    cursor: pointer; background: url("images/hawk.jpg") no-repeat center;}
+	div#pic2 {position: absolute; top: 20px; left: 260px;  cursor: pointer; background: url("images/hulk.jpg") no-repeat center;}
+	div#pic3 {position: absolute; top: 20px; left: 515px;  cursor: pointer; background: url("images/iron.jpg") no-repeat center;}
+	div#pic4 {position: absolute; top: 20px; left: 770px;  cursor: pointer; background: url("images/cap.jpg") no-repeat center;}
+	div#pic5 {position: absolute; top: 20px; left: 1025px; cursor: pointer; background: url("images/thor.jpg") no-repeat center;}
+	div#pic6 {position: absolute; top: 20px; left: 1280px; cursor: pointer; background: url("images/widow.jpg") no-repeat center;}
+</style>
+</head>
+
+<body>
+	<div id="wrapper">
+		<div id="pic1" onclick="location.href='hawkeye.html';"></div>
+		<div id="pic2" onclick="location.href='hulk.html';"></div>
+		<div id="pic3" onclick="location.href='ironman.html';"></div>
+		<div id="pic4" onclick="location.href='captain.html';"></div>
+		<div id="pic5" onclick="location.href='thor.html';"></div>
+		<div id="pic6" onclick="location.href='widow.html';"></div>
+		<p id="description">Earth's Mightiest Heroes stand as the planet's first line of defense against the most powerful threats in the universe.</p>
+		
+	</div>
+	
+	<span id="assemble">AVENGERS ASSEMBLE!</span>
+	<img id="avengers" src="images/avengers.png" alt="avengers" height="100px" width="350px" />
+	
+	<script src="js/jquery-3.6.1.min.js"></script>
+	
+	<script type="text/javascript"><!-- 
+		$(document).ready(function(){
+			
+			//rounds corners
+			$("div[id!='wrapper']").css("border-radius", "5px");
+			//set default opacity
+			$("div[id!='wrapper']").animate({"opacity" : .4}).hover(function() { 
+				$(this).animate({"opacity" : 1});
+			}, function() {
+				$(this).animate({"opacity" : .4});
+			});
+			
+			//rotate text
+			$("#assemble").addClass("rotate");
+		
+			//prevent scroll
+			$(window).scroll(function (event) {
+			$("#assemble").addClass("fixed");
+		});
+		});
+	
+	--></script>
+</body>
+</html>

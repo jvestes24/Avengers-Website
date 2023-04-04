@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Black Widow Comics</title>
+<link href="css/styles.css" rel="stylesheet" media="screen" />
+</head>
+
+<body>
+	<div id="page">
+		
+		<p id="description">Despite her origins as an agent of evil, Natasha Romanoff has become a force for good in the world of covert intelligence and super heroics. Like her namesake arachnid, Romanoff is stealthy, precise, and absolutely lethal. She is the Black Widow.<br /><br />-Marvel.com</p>
+		
+		
+	
+		<div id="main-content">
+		<section id="home">
+			<div id="container" class="container">
+				<div class="image_wrapper">
+					<img id="pic1" src="images/widow/1.jpg" alt="" />
+					<img id="pic2" src="images/widow/2.jpg" alt="" />
+					<img id="pic3" src="images/widow/3.jpg" alt="" />
+					<img id="pic4" src="images/widow/4.jpg" alt="" />
+					<img id="pic5" src="images/widow/5.jpg" alt="" />
+					<img id="pic6" src="images/widow/6.jpg" alt="" />
+					
+				</div> <!-- goes to img wrapper -->
+				<a href="index.html"><img id="avengers" src="images/avengers.png" alt="avengers" height="100px" width="350px" /></a>
+				<div class="next"></div>
+				<div class="prev"></div>
+				<div id="dropdown">Hope you like the comic covers!<br /><br />Click The Avengers logo below to go home and view more!<br /><br /><a class="close" href="#">Close</a></div>
+		
+				<ul class="nav">
+					<li id="nav1" class="selected"><a class="thumbnav" href="images/widow/1.jpg" rel="images/widow/thumbs/1.jpg">Image 1</a></li>
+					<li id="nav2"><a class="thumbnav" href="images/widow/2.jpg" rel="images/widow/thumbs/2.jpg">Image 2</a></li>
+					<li id="nav3"><a class="thumbnav" href="images/widow/3.jpg" rel="images/widow/thumbs/3.jpg">Image 3</a></li>
+					<li id="nav4"><a class="thumbnav" href="images/widow/4.jpg" rel="images/widow/thumbs/4.jpg">Image 4</a></li>
+					<li id="nav5"><a class="thumbnav" href="images/widow/5.jpg" rel="images/widow/thumbs/5.jpg">Image 5</a></li>
+					<li id="nav6"><a class="thumbnav" href="images/widow/6.jpg" rel="images/widow/thumbs/6.jpg">Image 6</a></li>
+					<li class="preview">
+						<div class="preview_wrapper">
+							<!-- thumbnail -->
+						</div>
+						<!-- little triangle-->
+						<span></span>
+					</li>
+				</ul>
+		
+
+			</div><!-- goes with container -->
+		</section>
+	</div>	<!-- goes with main content -->
+</div> <!-- goes with page -->
+	
+<script type="text/javascript" src="js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript"><!--
+	$(document).ready(function(e){
+		var counter = 1;
+		
+		//display the thumb
+		$("li").animate().hover(function(){
+			$("li.preview").css("display", "block");
+		}, function(){
+			$("li.preview").css("display", "none");
+		});
+		
+		//put the thumbnail into box
+		$("a.thumbnav").hover(function(e){
+			var rel = $(this).attr("rel");
+			$("div.preview_wrapper").css("background", "url(" + rel + ") no-repeat center");
+			
+		});
+		
+		//move the thumb image over the dot that is being hovered over
+		$("li#nav1").hover(function(e){
+			$("li.preview").css("left",  "-34.5px");
+		});
+		
+		$("li#nav2").hover(function(e){
+			$("li.preview").css("left",  "-14.5px");
+		});
+		
+		$("li#nav3").hover(function(e){
+			$("li.preview").css("left",  "5px");
+		});
+		
+		$("li#nav4").hover(function(e){
+			$("li.preview").css("left",  "24px");
+		});
+		
+		$("li#nav5").hover(function(e){
+			$("li.preview").css("left",  "42.5px");
+		});
+		
+		$("li#nav6").hover(function(e){
+			$("li.preview").css("left",  "62px");
+		});
+		
+		//thumbnail is clicked
+		var sign = "";
+		var imgNum = 0;
+		var move = 0;
+		
+		$("a.thumbnav").click(function(event){
+			event.preventDefault();
+			var ref = $(this).attr("href");
+			if( ref.indexOf("1") != -1 )
+				imgNum = 1;
+			else if( ref.indexOf("2") != -1 )
+				imgNum = 2;
+			else if( ref.indexOf("3") != -1 )
+				imgNum = 3;
+			else if( ref.indexOf("4") != -1 )
+				imgNum = 4;
+			else if( ref.indexOf("5") != -1 )
+				imgNum = 5;
+			else if( ref.indexOf("6") != -1 )
+				imgNum = 6;
+			
+			//determine how much to move images based on image clicked
+			if( (counter-imgNum) < 0)
+			{
+				move = (imgNum - counter)*650;
+				sign = "-=";
+			}
+			else
+			{
+				move = (counter -imgNum)*650;
+				sign = "+=";
+			}
+			
+			//move the image
+			$("img[id!='avengers']").animate({
+				left: sign+move
+			}, 200);
+			
+			counter = imgNum;
+			
+			$("li.selected").removeClass("selected");
+			$("li#nav"+imgNum).addClass("selected");
+		}); //end thumbnav
+		
+		//when the right arrow is clicked
+		$("div.next").click(function(e){
+			if(counter == 6)
+			{
+				//boundary case
+				$("img[id!='avengers']").animate({
+					left:"+=" + ((counter-1)*650)
+				}, 50);
+				
+				$("li.selected").removeClass("selected");
+				$("nav1").addClass("selected");
+				
+				counter = 1;
+			}
+			else if(counter < 6)
+			{
+				//all other cases
+				$("img[id!='avengers']").animate({
+					left:"-=650"
+				}, 200);
+				
+				$("li.selected").addClass("prevNav");
+				$("li.selected").removeClass("selected");
+				$("li.prevNav").next().addClass("selected");
+				$("li.prevNav").removeClass("prevNav");
+				
+				counter++;
+			}
+		});//end right click
+		
+		//when the left arrow is clicked
+		$("div.prev").click(function(e){
+			if(counter == 1)
+			{
+				//boundary case
+				$("img[id!='avengers']").animate({
+					left:"-=" + (5*650)
+				}, 50);
+				
+				$("li.selected").removeClass("selected");
+				$("nav6").addClass("selected");
+				
+				counter = 6;
+			}
+			else if(counter > 1)
+			{
+				//all other cases
+				$("img[id!='avengers']").animate({
+					left:"+=650"
+				}, 200);
+				
+				$("li.selected").addClass("prevNav");
+				$("li.selected").removeClass("selected");
+				$("li.prevNav").next().addClass("selected");
+				$("li.prevNav").removeClass("prevNav");
+				
+				counter--;
+			}
+		});//end left click
+		
+		//rotate text
+		$("#assemble").addClass("rotate");
+		
+		//prevent scroll
+		$(window).scroll(function (event) {
+			$("#assemble").addClass("fixed");
+		});
+		
+		//dropdown
+		$("#dropdown").animate({
+			top:"+200"
+		}, 1000);
+		
+		$("#dropdown").addClass("fixed");
+		
+		//close the dropdown div
+		$("a.close").click(function(event){
+			event.preventDefault();
+			
+			$("#dropdown").css("top", "-250px");
+		}); //end <a> click
+		
+		
+		
+	}); //end document ready
+
+--></script>
+</body>
+</html>
